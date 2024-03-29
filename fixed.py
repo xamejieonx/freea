@@ -8,6 +8,7 @@ import json
 import ctypes  # Импортируем модуль ctypes
 
 print(Back.GREEN + 'by xamejieon1337')
+print("Updated")
 
 # Проверяем, запущена ли программа от имени администратора
 if not ctypes.windll.shell32.IsUserAnAdmin():
