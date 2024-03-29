@@ -30,6 +30,7 @@ def find_file_in_same_directory(file_name):
     return None
 
 def open_file_and_press_f11(file_path):
+    print("OPENNED")
     os.startfile(file_path)
     time.sleep(1)  # Пауза в 1 секунду
     pyautogui.press('f11')  # Нажимаем клавишу F11
