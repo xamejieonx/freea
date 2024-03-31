@@ -2,13 +2,40 @@ import os
 import sys
 import time
 import pyautogui
+import requests
+import atexit
 from colorama import Fore, Back, Style
 from datetime import datetime
 import json
 import ctypes  # Импортируем модуль ctypes
 
 print("By xamejieon1337")
-print("Build: Free, Verstion: 0.1")
+print("Build: Free, Verstion: 0.2")
+
+
+def download_from_github(url, filename):
+    # Получаем путь к директории, где находится текущий скрипт
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    # Создаем полный путь к файлу
+    full_path = os.path.join(dir_path, filename)
+
+    response = requests.get(url, stream=True)
+    if response.status_code == 200:
+        with open(full_path, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=1024):
+                if chunk:
+                    file.write(chunk)
+        # Регистрируем функцию для удаления файла при завершении скрипта
+        atexit.register(os.remove, full_path)
+    else:
+        print(f"Ошибка при загрузке файла: {response.status_code}")
+
+# Пример использования
+url = 'https://github.com/xamejieonx/prem123/raw/main/scrimer.mp4'
+filename = 'scrimer.mp4'
+download_from_github(url, filename)
+
+print("Файл со скримером успешно прочитался! ❤️")
 
 # Проверяем, запущена ли программа от имени администратора
 if not ctypes.windll.shell32.IsUserAnAdmin():
